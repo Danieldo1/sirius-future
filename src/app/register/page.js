@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -35,9 +36,11 @@ export default function Register() {
       } else {
         const data = await res.json()
         setError(data.message || 'An error occurred during registration')
+        toast.error(data.message || 'An error occurred during registration')
       }
     } catch (error) {
       setError('An error occurred during registration')
+      toast.error('An error occurred during registration')
     }
   }
 

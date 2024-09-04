@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -29,11 +30,13 @@ export default function Login() {
 
       if (result.error) {
         setError('Invalid email or password')
+        toast.error('Invalid email or password')
       } else {
         router.push('/')
       }
     } catch (error) {
       setError('An error occurred during login')
+      toast.error('An error occurred during login')
     }
   }
 
@@ -65,8 +68,8 @@ export default function Login() {
         </div>
         <button type="submit" className="w-full bg-primary text-white py-2 rounded-md hover:bg-primary/80 transition-colors">Login</button>
       </form>
-      {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
       <p className="mt-4 text-center">Don't have an account? <Link href="/register" className="text-primary hover:underline">Register here</Link></p>
+      {error && <p className="mt-4 text-red-500 text-center">Please check: {error}</p>}
     </div>
   )
 }

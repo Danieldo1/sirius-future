@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
+import toast from 'react-hot-toast'
 
 export default function Statistics() {
   const [stats, setStats] = useState(null)
@@ -20,6 +21,7 @@ export default function Statistics() {
       setStats(data)
     } catch (error) {
       console.error('Error fetching referral statistics:', error)
+      toast.error('Error fetching referral statistics')
     }
   }
 

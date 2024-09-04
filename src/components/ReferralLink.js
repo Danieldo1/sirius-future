@@ -38,6 +38,7 @@ export default function ReferralLink() {
       toast.error('No referral link generated yet')
     }
   }
+  
 
   return (
     <div className='flex justify-between flex-col h-full' >
@@ -63,6 +64,7 @@ export default function ReferralLink() {
         onClick={generateLink}
         className="bg-secondary text-white px-4 py-2 rounded-md hover:bg-secondary/80 transition-colors mb-4 w-full flex items-center justify-center gap-2"
       >
+        
         <DiamondPlus />
         Generate Link
       </button>
