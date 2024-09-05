@@ -49,7 +49,7 @@ export default function ReferralLink({onNewLink}) {
     <div className='flex justify-between flex-col h-full' >
       <h2 className="text-xl font-semibold mb-4">Generate Referral Link</h2>
       {!link && (
-        <div className="flex items-center justify-center p-16 mb-2 bg-gray-100 rounded-md border-dashed border-2">
+        <div className="flex items-center justify-center mt-4 p-8 bg-gray-100 rounded-md mb-2 border-dashed border-2">
           <Annoyed className="w-12 h-12 text-gray-400" />
           </div>
       )}
@@ -59,7 +59,7 @@ export default function ReferralLink({onNewLink}) {
           <p className="text-primary break-all">{link}</p>
           <motion.button
             whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.05 }}
 
             onClick={copyLink}
             className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/80 transition-colors mt-4 w-full"

@@ -153,7 +153,7 @@ export default function Payment({ onPaymentSuccess }) {
         </div>
         <motion.button
           whileTap={{ scale: 0.9 }}
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.05 }}
           type="submit"
           disabled={isProcessing}
           className={`w-full bg-primary text-white px-6 py-2 rounded-md hover:bg-primary/80 transition-colors ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
