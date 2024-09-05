@@ -5,13 +5,14 @@ import { useSession } from 'next-auth/react'
 import { Annoyed, DiamondPlus } from 'lucide-react'
 import toast from 'react-hot-toast'
 
-export default function ReferralLink() {
+export default function ReferralLink({onNewLink}) {
   const [link, setLink] = useState('')
   const { data: session } = useSession()
 
   const generateLink = async () => {
     if (!session) {
       console.error('User not authenticated')
+      toast.error('You must be logged in to generate a referral link')
       return
     }
 
@@ -19,8 +20,11 @@ export default function ReferralLink() {
       const res = await fetch('/api/referral/generate')
       const data = await res.json()
       setLink(data.referralLink)
+      if (onNewLink) onNewLink()
+      toast.success('New referral link generated!')
     } catch (error) {
       console.error('Error generating referral link:', error)
+      toast.error('Failed to generate referral link')
     }
   }
 

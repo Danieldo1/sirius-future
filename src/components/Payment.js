@@ -89,8 +89,8 @@ export default function Payment({ onPaymentSuccess }) {
         toast.error(data.error || 'Payment failed')
       }
     } catch (error) {
-      console.error('Payment error:', error)
-      toast.error('An error occurred during payment processing')
+      console.error('Error processing payment:', error)
+      
     } finally {
       setIsProcessing(false)
     }
@@ -141,7 +141,6 @@ export default function Payment({ onPaymentSuccess }) {
               type="text"
               id="cvv"
               name="cvv"
-              maxLength="3"
               value={cardData.cvv}
               onChange={handleChange}
               required

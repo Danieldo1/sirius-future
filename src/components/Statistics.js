@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
+import { Loader2 } from 'lucide-react'
 
-export default function Statistics() {
+export default function Statistics({refreshTrigger}) {
   const [stats, setStats] = useState(null)
   const { data: session } = useSession()
 
@@ -12,20 +13,23 @@ export default function Statistics() {
     if (session) {
       fetchStats()
     }
-  }, [session])
+  }, [session, refreshTrigger])
 
   const fetchStats = async () => {
     try {
       const res = await fetch('/api/referral/statistics')
-      const data = await res.json()
-      setStats(data)
+      if (res.ok) {
+        const data = await res.json()
+        setStats(data)
+      } else {
+        console.error('Failed to fetch statistics')
+      }
     } catch (error) {
       console.error('Error fetching referral statistics:', error)
-      toast.error('Error fetching referral statistics')
     }
   }
 
-  if (!stats) return <p className="text-center">Loading statistics...</p>
+  if (!stats) return <p className="text-center"><Loader2 className="mx-auto animate-spin" /></p>
 
   return (
     <div>
@@ -41,7 +45,7 @@ export default function Statistics() {
         </div>
       </div>
       <h3 className="text-lg font-semibold mb-2">Referral Details</h3>
-      <div className="overflow-x-auto">
+      <div className="w-500px max-h-40 overflow-y-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-gray-100">
@@ -51,7 +55,7 @@ export default function Statistics() {
             </tr>
           </thead>
           <tbody>
-            {stats.referralDetails.map((referral, index) => (
+            {stats?.referralDetails?.map((referral, index) => (
               <tr key={index} className="border-b">
                 <td className="p-2">{referral.code}</td>
                 <td className="p-2">{referral.signups}</td>
@@ -61,6 +65,7 @@ export default function Statistics() {
           </tbody>
         </table>
       </div>
+      
     </div>
   )
 }
