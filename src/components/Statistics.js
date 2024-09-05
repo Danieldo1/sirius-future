@@ -51,15 +51,16 @@ export default function Statistics({refreshTrigger}) {
       </div>
       <h3 className="text-lg font-semibold mb-2">Referral Details</h3>
       <div className="w-500px max-h-40 overflow-y-auto">
+        
         <table className="w-full text-sm">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-gray-100 ">
               <th className="p-2 text-left">Referral Code</th>
               <th className="p-2 text-left">Signups</th>
               <th className="p-2 text-left">Created At</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody >
             {stats?.referralDetails?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((referral, index) => (
               <tr key={index} className="border-b ">
                 <td className="p-2">{referral.code}</td>
@@ -68,7 +69,7 @@ export default function Statistics({refreshTrigger}) {
                 <motion.button
                   whileTap={{ scale: 0.9, opacity: 0.8 }}
                   whileHover={{ scale: 1.1 }}
-                  className="p-1 mt-1.5 bg-slate-200 rounded-full -ml-10"
+                  className="p-1 mt-1.5 bg-slate-200 rounded-full "
                   onClick={() => {
                     navigator.clipboard.writeText(process.env.NEXT_PUBLIC_URL + '/register?ref=' + referral.code)
                       .then(() => {
@@ -80,6 +81,7 @@ export default function Statistics({refreshTrigger}) {
                       })
                   }}
                 ><Clipboard className="w-4 h-4 text-gray-400" /></motion.button>
+                
               </tr>
             ))}
           </tbody>
