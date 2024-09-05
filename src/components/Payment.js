@@ -98,7 +98,11 @@ export default function Payment({ onPaymentSuccess }) {
   }
 
   return (
-    <div className="mt-8">
+    <motion.div
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="my-3">
       <h2 className="text-xl font-semibold mb-4">Make a Payment</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -161,6 +165,6 @@ export default function Payment({ onPaymentSuccess }) {
           {isProcessing ? 'Processing...' : 'Pay Now'}
         </motion.button>
       </form>
-    </div>
+    </motion.div>
   )
 }

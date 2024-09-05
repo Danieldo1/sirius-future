@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const ReferralInfo = ({refreshTrigger}) => {
   const { data: session, status } = useSession();
@@ -26,7 +27,11 @@ const ReferralInfo = ({refreshTrigger}) => {
   };
 
   return (
-    <>
+    <motion.div
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    >
       {referralInfo && (
         <div className="mt-8 bg-surface p-6 rounded-lg shadow-md md:col-span-2">
           <h2 className="text-2xl font-semibold mb-4">Your Referrals</h2>
@@ -69,7 +74,7 @@ const ReferralInfo = ({refreshTrigger}) => {
           )}
         </div>
       )}
-    </>
+    </motion.div>
   );
 };
 

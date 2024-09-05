@@ -46,7 +46,11 @@ export default function ReferralLink({onNewLink}) {
   
 
   return (
-    <div className='flex justify-between flex-col h-full' >
+    <motion.div
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className='flex justify-between flex-col h-full' >
       <h2 className="text-xl font-semibold mb-4">Generate Referral Link</h2>
       {!link && (
         <div className="flex items-center justify-center mt-4 p-8 bg-gray-100 rounded-md mb-2 border-dashed border-2">
@@ -78,6 +82,6 @@ export default function ReferralLink({onNewLink}) {
         <DiamondPlus />
         Generate Link
       </motion.button>
-    </div>
+    </motion.div>
   )
 }

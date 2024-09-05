@@ -54,7 +54,11 @@ export default function Register() {
   }
 
   return (
-    <div className="max-w-md mx-auto">
+    <motion.div
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="max-w-md mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-center">Create an Account</h1>
       <form onSubmit={handleSubmit} className="bg-surface p-8 rounded-lg shadow-md">
         <div className="mb-4">
@@ -158,6 +162,6 @@ export default function Register() {
       <p className="mt-4 text-center">
         Already have an account? <Link href="/login" className="text-secondary hover:underline">Login here</Link>
       </p>
-    </div>
+    </motion.div>
   )
 }

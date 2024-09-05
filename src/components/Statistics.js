@@ -33,7 +33,11 @@ export default function Statistics({refreshTrigger}) {
   if (!stats) return <p className="text-center"><Loader2 className="mx-auto animate-spin" /></p>
 
   return (
-    <div>
+    <motion.div
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    >
       <h2 className="text-xl font-semibold mb-4">Your Referral Statistics</h2>
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div className="bg-primary/10 p-4 rounded-md">
@@ -82,6 +86,6 @@ export default function Statistics({refreshTrigger}) {
         </table>
       </div>
       
-    </div>
+    </motion.div>
   )
 }

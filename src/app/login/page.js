@@ -42,7 +42,11 @@ export default function Login() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-6">
+    <motion.div
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="max-w-md mx-auto mt-6">
       <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
       <form onSubmit={handleSubmit} className="bg-surface p-8 rounded-lg shadow-md">
         <div className="mb-4">
@@ -76,6 +80,6 @@ export default function Login() {
       </form>
       <p className="mt-4 text-center">Don&apos;t have an account? <Link href="/register" className="text-primary hover:underline">Register here</Link></p>
       {error && <p className="mt-4 text-red-500 text-center">Please check: {error}</p>}
-    </div>
+    </motion.div>
   )
 }

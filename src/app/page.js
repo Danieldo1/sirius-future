@@ -19,6 +19,20 @@ export default function Home() {
     setRefreshTrigger(prev => prev + 1)
   }
 
+  const headingVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  const btnVariants = {
+    hidden: { opacity: 0, y: 20,  },
+    visible: { opacity: 1, y: 0, transition: { delay: 0.7 }  },
+  };
+
+  const paragraphVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { delay: 0.5 } }
+  };
   
 
   if (status === "loading") {
@@ -27,18 +41,40 @@ export default function Home() {
 
   if (!session) {
     return (
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-6">Welcome to the SupaSchool</h1>
-        <Image src='/school-pic-boy.png' width={300} height={300} alt="School" className="mx-auto select-none"/>
-        <p className="mb-8">Please sign in to access your account.</p>
+      <div className="text-center bg-white p-6 rounded-lg shadow">
+       <motion.h1 
+          initial="hidden" 
+          animate="visible" 
+          variants={headingVariants} 
+          transition={{ duration: 0.5 }} 
+          className="text-4xl font-bold mb-6 select-none"
+        >
+          Welcome to the SupaSchool
+        </motion.h1>
+        <Image src='/school-pic-boy.png' width={300} height={300} alt="School" draggable="false" className="mx-auto select-none"/>
+        <motion.p 
+          initial="hidden" 
+          animate="visible" 
+          variants={paragraphVariants} 
+          transition={{ duration: 0.5, delay: 0.2 }} 
+          className="mb-8 text-gray-600"
+        >
+          Please sign in to access your account.
+        </motion.p>
         <div className="space-x-4">
           <Link href="/login">
             <motion.button 
+            initial="hidden" 
+            animate="visible"
+            variants={btnVariants}
             whileHover={{ scale: 1.1 }}
             className="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary/80 transition-colors">Sign In</motion.button>
           </Link>
           <Link href="/register">
             <motion.button 
+            initial="hidden" 
+            animate="visible"
+            variants={btnVariants}
             whileHover={{ scale: 1.1 }}
             className="bg-secondary text-white px-6 py-2 rounded-md hover:bg-secondary/80 transition-colors">Sign Up</motion.button>
           </Link>

@@ -52,12 +52,18 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div
+   
+    className="container mx-auto px-4 py-8">
     <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
     
-    <SavedPaymentMethod paymentMethod={savedPaymentMethod} />
+    
 
-    <div className="bg-white p-6 rounded shadow mt-6">
+    <motion.div
+     initial={{ opacity: 0, y: -20 }}
+     animate={{ opacity: 1, y: 0 }}
+     transition={{ duration: 0.5 }}
+    className="bg-white p-6 rounded shadow mt-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold">My Lessons</h2>
         <motion.button 
@@ -102,9 +108,10 @@ export default function Dashboard() {
       ) : (
         <p className="text-gray-600">You don&apos;t have any lessons yet.</p>
       )}
-    </div>
+    </motion.div>
 
-   
+    <SavedPaymentMethod paymentMethod={savedPaymentMethod} />
+    
   </div>
   );
 }
