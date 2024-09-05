@@ -92,7 +92,7 @@ export default function Dashboard() {
           ))}
         </ul>
       ) : (
-        <p className="text-gray-600">You don't have any lessons yet.</p>
+        <p className="text-gray-600">You don&apos;t have any lessons yet.</p>
       )}
     </div>
 

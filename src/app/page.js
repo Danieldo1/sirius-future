@@ -87,7 +87,7 @@ export default function Home() {
              </ul>
            </div>
           ) : (
-            <p>You haven't referred anyone yet.</p>
+            <p>You haven&apos;t referred anyone yet.</p>
           )}
 
           {referralInfo?.referredBy && (
