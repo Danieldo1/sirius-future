@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 import Payment from "@/components/Payment";
 import Image from "next/image";
 import SavedPaymentMethod from "@/components/SavedPaymentMethod";
-import { Loader2 } from "lucide-react";
+import { Banknote, Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Dashboard() {
   const [lessons, setLessons] = useState([])
@@ -59,12 +60,19 @@ export default function Dashboard() {
     <div className="bg-white p-6 rounded shadow mt-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold">My Lessons</h2>
-        <button 
+        <motion.button 
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           onClick={() => setShowPayment(!showPayment)}
           className="bg-primary text-white px-4 py-2 rounded hover:bg-primary/80 transition-colors"
         >
-          {showPayment ? 'Hide Payment' : 'Buy More Lessons'}
-        </button>
+          {showPayment ? 'Hide Payment' : (
+            <div className="flex items-center">
+              <Banknote  />
+              <span className="ml-2">Buy Lessons</span>
+            </div>
+          )}
+        </motion.button>
       </div>
       {showPayment && (
       <div className="my-6 border-[1px] border-gray-200 p-4 rounded-md">

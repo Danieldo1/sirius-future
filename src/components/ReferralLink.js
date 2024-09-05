@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { Annoyed, DiamondPlus } from 'lucide-react'
 import toast from 'react-hot-toast'
+import { motion } from 'framer-motion'
 
 export default function ReferralLink({onNewLink}) {
   const [link, setLink] = useState('')
@@ -56,22 +57,27 @@ export default function ReferralLink({onNewLink}) {
         <div className="mt-4 p-3 bg-gray-100 rounded-md mb-2 border-dashed border-2">
           <p className="font-medium">Your referral link:</p>
           <p className="text-primary break-all">{link}</p>
-          <button
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.1 }}
+
             onClick={copyLink}
             className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/80 transition-colors mt-4 w-full"
           >
             Copy Link
-          </button>
+          </motion.button>
         </div>
       )}
-      <button 
+      <motion.button
+        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.1 }} 
         onClick={generateLink}
         className="bg-secondary text-white px-4 py-2 rounded-md hover:bg-secondary/80 transition-colors mb-4 w-full flex items-center justify-center gap-2"
       >
         
         <DiamondPlus />
         Generate Link
-      </button>
+      </motion.button>
     </div>
   )
 }

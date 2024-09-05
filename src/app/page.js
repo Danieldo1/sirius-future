@@ -8,6 +8,7 @@ import { Loader2 } from "lucide-react"
 import Image from "next/image"
 import { useState, useEffect } from 'react'
 import ReferralInfo from "@/components/ReferralInfo"
+import { motion } from "framer-motion"
 
 export default function Home() {
   const { data: session, status } = useSession()
@@ -32,10 +33,14 @@ export default function Home() {
         <p className="mb-8">Please sign in to access your account.</p>
         <div className="space-x-4">
           <Link href="/login">
-            <button className="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary/80 transition-colors">Sign In</button>
+            <motion.button 
+            whileHover={{ scale: 1.1 }}
+            className="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary/80 transition-colors">Sign In</motion.button>
           </Link>
           <Link href="/register">
-            <button className="bg-secondary text-white px-6 py-2 rounded-md hover:bg-secondary/80 transition-colors">Sign Up</button>
+            <motion.button 
+            whileHover={{ scale: 1.1 }}
+            className="bg-secondary text-white px-6 py-2 rounded-md hover:bg-secondary/80 transition-colors">Sign Up</motion.button>
           </Link>
         </div>
       </div>
@@ -56,7 +61,9 @@ export default function Home() {
       </div>
       <div className="mt-8 text-center">
         <Link href="/api/auth/signout">
-          <button className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition-colors">Sign Out</button>
+          <motion.button 
+          whileHover={{ scale: 1.1 }}
+          className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition-colors">Sign Out</motion.button>
         </Link>
       </div>
     </div>

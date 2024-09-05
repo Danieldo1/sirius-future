@@ -5,6 +5,7 @@ import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
+import { motion } from 'framer-motion'
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -41,7 +42,7 @@ export default function Login() {
   }
 
   return (
-    <div className="max-w-md mx-auto">
+    <div className="max-w-md mx-auto mt-6">
       <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
       <form onSubmit={handleSubmit} className="bg-surface p-8 rounded-lg shadow-md">
         <div className="mb-4">
@@ -50,7 +51,7 @@ export default function Login() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Email"
+            placeholder="bLXpC@example.com"
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
           />
@@ -61,12 +62,17 @@ export default function Login() {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="Password"
+            placeholder="•••••••••"
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
-        <button type="submit" className="w-full bg-primary text-white py-2 rounded-md hover:bg-primary/80 transition-colors">Login</button>
+        <motion.button 
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        disabled={!formData.email || !formData.password}
+        type="submit" 
+        className="w-full bg-primary text-white py-2 rounded-md hover:bg-primary/80 transition-colors disabled:bg-primary/40 disabled:cursor-not-allowed">Login</motion.button>
       </form>
       <p className="mt-4 text-center">Don&apos;t have an account? <Link href="/register" className="text-primary hover:underline">Register here</Link></p>
       {error && <p className="mt-4 text-red-500 text-center">Please check: {error}</p>}

@@ -6,6 +6,7 @@ import Link from 'next/link'
 import toast from 'react-hot-toast'
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
+import {motion} from 'framer-motion'
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -64,6 +65,7 @@ export default function Register() {
             id="surname"
             type="text"
             name="surname"
+            placeholder="Сперанский"
             value={formData.surname}
             onChange={handleChange}
             required
@@ -78,6 +80,7 @@ export default function Register() {
             id="name"
             type="text"
             name="name"
+            placeholder="Даниил"
             value={formData.name}
             onChange={handleChange}
             required
@@ -92,6 +95,7 @@ export default function Register() {
             id="middleName"
             type="text"
             name="middleName"
+            placeholder="Владимирович"
             value={formData.middleName}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary"
@@ -105,6 +109,7 @@ export default function Register() {
             international
             countryCallingCodeEditable={false}
             defaultCountry="RU"
+            
             value={formData.phone}
             onChange={handlePhoneChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary"
@@ -118,6 +123,7 @@ export default function Register() {
             id="email"
             type="email"
             name="email"
+            placeholder="bLXpC@example.com"
             value={formData.email}
             onChange={handleChange}
             required
@@ -132,18 +138,20 @@ export default function Register() {
             id="password"
             type="password"
             name="password"
+            placeholder="•••••••••"
             value={formData.password}
             onChange={handleChange}
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary"
           />
         </div>
-        <button 
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
           type="submit" 
           className="w-full bg-secondary text-white py-2 rounded-md hover:bg-secondary/80 transition-colors"
         >
           Register
-        </button>
+        </motion.button>
       </form>
       {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
       {ref && <p className="mt-4 text-green-600 text-center">You were referred by a friend!</p>}

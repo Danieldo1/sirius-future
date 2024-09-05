@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
 import InputMask from 'react-input-mask'
+import { motion } from 'framer-motion'
 
 export default function Payment({ onPaymentSuccess }) {
   const [cardData, setCardData] = useState({
@@ -150,13 +151,15 @@ export default function Payment({ onPaymentSuccess }) {
             <p className="mt-1 text-sm text-gray-500 select-none">3 цифры любые</p>
           </div>
         </div>
-        <button
+        <motion.button
+          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.1 }}
           type="submit"
           disabled={isProcessing}
           className={`w-full bg-primary text-white px-6 py-2 rounded-md hover:bg-primary/80 transition-colors ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           {isProcessing ? 'Processing...' : 'Pay Now'}
-        </button>
+        </motion.button>
       </form>
     </div>
   )
