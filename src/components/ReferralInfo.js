@@ -56,9 +56,10 @@ const ReferralInfo = ({ refreshTrigger }) => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
+      className='md:col-span-2'
     >
       {referralInfo && (
-        <div className="mt-8 bg-surface p-6 rounded-lg shadow-md md:col-span-2">
+        <div className="mt-8 bg-surface p-6 rounded-lg shadow-md ">
           <h2 className="text-2xl font-semibold mb-4">Your Referrals</h2>
           {referralInfo.referrals.length > 0 ? (
             <ul className="space-y-4">
