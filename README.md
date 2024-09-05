@@ -1,36 +1,130 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Система рефералов для школы
 
-## Getting Started
+Эта система разработана для управления реферальной программой школы, включая генерацию реферальных ссылок, регистрацию новых пользователей и обработку платежей.
 
-First, run the development server:
+## Установка и запуск
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Клонируйте репозиторий:
+   ```
+   git clone [URL вашего репозитория]
+   cd [название директории проекта]
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Установите зависимости:
+   ```
+   yarn install
+   ```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+3. Создайте файл `.env.local` и добавьте следующие переменные окружения:
+   ```
+   NEXTAUTH_SECRET=ваш_секретный_ключ
+   MONGODB_URI=ваша_строка_подключения_к_mongodb
+   NEXTAUTH_URL=http://localhost:3000
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Запустите проект в режиме разработки:
+   ```
+   yarn dev
+   ```
 
-## Learn More
+5. Откройте [http://localhost:3000](http://localhost:3000) в вашем браузере.
 
-To learn more about Next.js, take a look at the following resources:
+## API Эндпоинты
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1. Генерация реферальной ссылки
+- **URL**: `/api/referral/generate`
+- **Метод**: GET
+- **Аутентификация**: Требуется
+- **Описание**: Генерирует уникальную реферальную ссылку для авторизованного пользователя.
+- **Ответ**: 
+  ```json
+  {
+    "referralLink": "http://localhost:3000/register?ref=XXXXXXXXXXXX",
+    "referralCode": "XXXXXXXXXXXX"
+  }
+  ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 2. Регистрация пользователя
+- **URL**: `/api/register`
+- **Метод**: POST
+- **Тело запроса**:
+  ```json
+  {
+    "name": "Имя Фамилия",
+    "email": "user@example.com",
+    "password": "password123",
+    "referralCode": "XXXXXXXXXXXX" // опционально
+  }
+  ```
+- **Описание**: Регистрирует нового пользователя. Если указан реферальный код, связывает нового пользователя с реферером.
+- **Ответ**: 
+  ```json
+  {
+    "message": "User registered successfully"
+  }
+  ```
 
-## Deploy on Vercel
+### 3. Обработка платежа
+- **URL**: `/api/payment/process`
+- **Метод**: POST
+- **Аутентификация**: Требуется
+- **Тело запроса**:
+  ```json
+  {
+    "number": "4111111111111111",
+    "expirationMonth": "12",
+    "expirationYear": "2025",
+    "cvv": "123"
+  }
+  ```
+- **Описание**: Обрабатывает платеж и добавляет уроки пользователю и его рефереру (если есть).
+- **Ответ**: 
+  ```json
+  {
+    "message": "Payment processed and lessons added successfully"
+  }
+  ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 4. Получение статистики рефералов
+- **URL**: `/api/referral/statistics`
+- **Метод**: GET
+- **Аутентификация**: Требуется
+- **Описание**: Возвращает статистику рефералов для авторизованного пользователя.
+- **Ответ**: 
+  ```json
+  {
+    "totalReferrals": 5,
+    "totalSignups": 3,
+    "referralDetails": [
+      {
+        "code": "XXXXXXXXXXXX",
+        "signups": 2,
+        "createdAt": "2023-05-20T12:00:00Z"
+      },
+      // ...
+    ]
+  }
+  ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 5. Получение информации о пользователе
+- **URL**: `/api/user/[id]`
+- **Метод**: GET
+- **Аутентификация**: Требуется
+- **Описание**: Возвращает информацию о пользователе по его ID.
+- **Ответ**: 
+  ```json
+  {
+    "name": "Имя Фамилия",
+    "phone": "+79165556973",
+    "email": "user@example.com",
+    "hasPurchasedLessons": true,
+    "numberOfLessons": 4
+  }
+  ```
+
+## Дополнительная информация
+
+Для получения дополнительной информации о работе с Next.js, обратитесь к следующим ресурсам:
+
+- [Документация Next.js](https://nextjs.org/docs) - узнайте о функциях и API Next.js.
+- [Изучите Next.js](https://nextjs.org/learn) - интерактивный учебник по Next.js.
