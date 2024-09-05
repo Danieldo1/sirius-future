@@ -84,7 +84,7 @@ const ReferralInfo = ({ refreshTrigger }) => {
               ))}
             </ul>
           ) : (
-            <p>You haven't referred anyone yet.</p>
+            <p>You haven&apos;t referred anyone yet.</p>
           )}
 
           {referralInfo.referredBy && (
