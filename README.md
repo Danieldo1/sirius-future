@@ -6,8 +6,8 @@
 
 1. Клонируйте репозиторий:
    ```
-   git clone [URL вашего репозитория]
-   cd [название директории проекта]
+   git clone https://github.com/Danieldo1/sirius-future
+   cd sirius-future
    ```
 
 2. Установите зависимости:
