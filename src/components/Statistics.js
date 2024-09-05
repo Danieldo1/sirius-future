@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
-import { Loader2 } from 'lucide-react'
+import { Clipboard, Loader2 } from 'lucide-react'
+import { color, motion } from 'framer-motion'
 
 export default function Statistics({refreshTrigger}) {
   const [stats, setStats] = useState(null)
@@ -55,11 +56,26 @@ export default function Statistics({refreshTrigger}) {
             </tr>
           </thead>
           <tbody>
-            {stats?.referralDetails?.map((referral, index) => (
-              <tr key={index} className="border-b">
+            {stats?.referralDetails?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((referral, index) => (
+              <tr key={index} className="border-b ">
                 <td className="p-2">{referral.code}</td>
                 <td className="p-2">{referral.signups}</td>
                 <td className="p-2">{new Date(referral.createdAt).toLocaleDateString()}</td>
+                <motion.button
+                  whileTap={{ scale: 0.9, opacity: 0.8 }}
+                  whileHover={{ scale: 1.1 }}
+                  className="p-1 mt-1.5 bg-slate-200 rounded-full -ml-10"
+                  onClick={() => {
+                    navigator.clipboard.writeText(process.env.NEXT_PUBLIC_URL + '/register?ref=' + referral.code)
+                      .then(() => {
+                        toast.success('Code copied to clipboard!')
+                      })
+                      .catch((err) => {
+                        console.error('Failed to copy: ', err)
+                        toast.error('Failed to copy code')
+                      })
+                  }}
+                ><Clipboard className="w-4 h-4 text-gray-400" /></motion.button>
               </tr>
             ))}
           </tbody>

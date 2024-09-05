@@ -57,7 +57,7 @@ export default function Home() {
         <div className="bg-surface p-6 rounded-lg shadow-md">
           <ReferralLink onNewLink={handleNewReferralLink} />
         </div>
-        <ReferralInfo />
+        <ReferralInfo refreshTrigger={refreshTrigger}  />
       </div>
       <div className="mt-8 text-center">
         <Link href="/api/auth/signout">

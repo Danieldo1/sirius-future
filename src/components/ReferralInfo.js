@@ -3,15 +3,15 @@
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 
-const ReferralInfo = () => {
-    const { data: session, status } = useSession()
+const ReferralInfo = ({refreshTrigger}) => {
+  const { data: session, status } = useSession();
   const [referralInfo, setReferralInfo] = useState(null);
 
   useEffect(() => {
     if (session) {
       fetchReferralInfo();
     }
-  }, [session]);
+  }, [session, refreshTrigger]);
 
   const fetchReferralInfo = async () => {
     try {
@@ -33,21 +33,24 @@ const ReferralInfo = () => {
           {referralInfo?.referrals.length > 0 ? (
             <div className="w-500px max-h-80 overflow-y-auto">
               <ul className="space-y-4">
-                {referralInfo.referrals.map((referral, index) => (
-                  <li key={index} className="bg-white p-4 rounded shadow">
-                    <p className="font-semibold">
-                      Referral Code: {referral.code}
-                    </p>
-                    <p>Referred Users:</p>
-                    <ul className="list-disc list-inside">
-                      {referral.referredUsers.map((user, userIndex) => (
-                        <li key={userIndex}>
-                          {user.name} ({user.email})
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
+                {referralInfo.referrals
+                  ?.slice()
+                  .reverse()
+                  .map((referral, index) => (
+                    <li key={index} className="bg-white p-4 rounded shadow">
+                      <p className="font-semibold">
+                        Referral Code: {referral.code}
+                      </p>
+                      <p>Referred Users:</p>
+                      <ul className="list-disc list-inside">
+                        {referral.referredUsers.map((user, userIndex) => (
+                          <li key={userIndex}>
+                            {user.name} ({user.email})
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
               </ul>
             </div>
           ) : (
