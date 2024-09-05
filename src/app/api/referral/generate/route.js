@@ -4,8 +4,15 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import connectDB from '@/app/lib/connectDB'
 import User from '@/app/models/User'
 import Referral from '@/app/models/Referral'
+import { getToken } from 'next-auth/jwt'
 
 export async function GET(request) {
+ // Protecting route wuth JWT token
+ const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
+
+ if (!token) {
+   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+ }
   const session = await getServerSession(authOptions)
 
   if (!session) {
@@ -25,7 +32,7 @@ export async function GET(request) {
   const newReferral = new Referral({
     referrerId: user._id,
     referralCode,
-    referredUsers: [], // Инициализируем пустым массивом
+    referredUsers: [], 
   })
 
   try {

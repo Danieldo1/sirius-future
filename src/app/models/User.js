@@ -1,5 +1,19 @@
 import mongoose from 'mongoose';
 
+const LessonSchema = new mongoose.Schema({
+  title: String,
+  content: String,
+  completed: { type: Boolean, default: false },
+}, { timestamps: true });
+
+const PaymentMethodSchema = new mongoose.Schema({
+  last4: String,
+  expirationMonth: String,
+  expirationYear: String,
+  encryptedNumber: String,
+  iv: String,
+}, { timestamps: true });
+
 const UserSchema = new mongoose.Schema({
   surname: {
     type: String,
@@ -11,7 +25,6 @@ const UserSchema = new mongoose.Schema({
   },
   middleName: {
     type: String,
-    // Not required
   },
   phone: {
     type: String,
@@ -25,6 +38,14 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Please provide a password'],
+  },
+  lessons: {
+    type: [LessonSchema],
+    default: [],
+  },
+  paymentMethods: {
+    type: [PaymentMethodSchema],
+    default: [],
   },
 }, { timestamps: true });
 

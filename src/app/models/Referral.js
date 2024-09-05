@@ -15,13 +15,14 @@ const ReferralSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }],
+  isSuccessful: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
 
-
-mongoose.models = {};
-
-export default mongoose.model('Referral', ReferralSchema);
+export default mongoose.models.Referral || mongoose.model('Referral', ReferralSchema);
