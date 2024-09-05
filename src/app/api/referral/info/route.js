@@ -4,6 +4,8 @@ import connectDB from "@/app/lib/connectDB"
 import User from "@/app/models/User"
 import Referral from "@/app/models/Referral"
 
+export const dynamic = 'force-dynamic'
+
 
 export async function GET(request) {
     try {

@@ -3,6 +3,8 @@ import { getToken } from "next-auth/jwt"
 import connectDB from '@/app/lib/connectDB'
 import User from '@/app/models/User'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request) {
   try {
     const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
