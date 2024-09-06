@@ -26,16 +26,14 @@
    NEXTAUTH_SECRET=ваш_секретный_ключ
    MONGODB_URI=ваша_строка_подключения_к_mongodb
    ENCRYPTION_KEY=ваш_секретный_ключ_32_chr
-
 ```
 
 4. Запустите проект в режиме разработки:
-```
 
+```
 yarn dev
 или
 npm run dev
-
 ````
 
 5. Откройте [http://localhost:3000](http://localhost:3000) в вашем браузере.
